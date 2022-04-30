@@ -1,9 +1,15 @@
-FROM node
+FROM node:18-alpine
 
-WORKDIR app
+EXPOSE 80
 
-COPY . /
+RUN apk add --update tini
 
-RUN npm install
+WORKDIR /usr/src/app
 
-CMD ["npm", "start"]
+COPY package.json package.json
+
+RUN npm install && npm cache clean
+
+COPY . .
+
+CMD ["tini", "--", "node", "./bin/www"]
