@@ -6,7 +6,7 @@ services:
     image: custom-drupal
     build: 
       context: .
-      dockerfile: nginx.Dockerfile
+      dockerfile: drupal.Dockerfile
     ports:
       - "80:80"
     volumes:
